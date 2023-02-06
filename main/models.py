@@ -10,3 +10,12 @@ class Quote(models.Model):
 
     def __str__(self):
         return self.text
+    
+
+
+class FreePatent(models.Model):
+    title = models.CharField(max_length=500, null=True, blank=True)
+    description = models.TextField(max_length=2000,null=True, blank= True)
+
+    def __str__(self):
+        return self.title
