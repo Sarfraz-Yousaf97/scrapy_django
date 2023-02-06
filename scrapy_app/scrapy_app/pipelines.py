@@ -4,8 +4,8 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-from main.models import Quote, FreePatent
-
+from main.models import Quote, FreePatent, LogoModel
+from .spiders.googlepatent import model
 
 class ScrapyAppPipeline(object):
     # def process_item(self, item, spider):
@@ -14,9 +14,12 @@ class ScrapyAppPipeline(object):
     #     return item
     
     def process_item(self, item, spider):
-        quote = FreePatent(title=item.get('title'), description=item.get('description'))
+        if model == "Patent":
+            quote = FreePatent(title=item.get('title'), description=item.get('description'))
+            quote.save()
+            return item
+        quote = LogoModel(title=item.get('title'), description=item.get('description'))
         quote.save()
         return item
-    
 
     # pass
