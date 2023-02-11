@@ -14,21 +14,21 @@ class ScrapyAppPipeline(object):
     #     return item
     
     def process_item(self, item, spider):
-        if model == ModelChoices.TRADEMARK.value:
-            quote = TrademarkModel(title=item.get('title'), description=item.get('description'))
-            quote.save()
-            return item
-        if model == ModelChoices.PATENT.value:
-            quote = FreePatent(title=item.get('title'), description=item.get('description'))
-            quote.save()
-            return item
-        if model == ModelChoices.LOGO.value:
-            quote = LogoModel(title=item.get('title'), description=item.get('description'))
-            quote.save()
-            return item
-        if model == ModelChoices.IMAGE.value:
-            quote = ImageModel(title=item.get('title'), description=item.get('description'))
-            quote.save()
-            return item
-
+        # if model == ModelChoices.TRADEMARK.value:
+        #     quote = TrademarkModel(title=item.get('title'), description=item.get('description'))
+        #     quote.save()
+        #     return item
+        # if model == ModelChoices.PATENT.value:
+        #     quote = FreePatent(title=item.get('title'), description=item.get('description'))
+        #     quote.save()
+        #     return item
+        # if model == ModelChoices.LOGO.value:
+        #     quote = LogoModel(title=item.get('title'), description=item.get('description'))
+        #     quote.save()
+        #     return item
+        # if model == ModelChoices.IMAGE.value:
+        #     quote = ImageModel(title=item.get('title'), description=item.get('description'))
+        #     quote.save()
+        #     return item
+        return item
     # pass

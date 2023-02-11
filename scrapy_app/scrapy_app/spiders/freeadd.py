@@ -11,17 +11,17 @@ class FreePatentSpider(scrapy.Spider):
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
 
     def parse(self, response):
-        for data in response.xpath("//table[@class='listing_table']//td//a"):
-            text = data.xpath(".//text()").get()
-            related_link = data.xpath(".//@href").get()
-            absolute_url = f"https://www.freepatentsonline.com{related_link}"
-            # yield{
-            #     'text':text, 
-            #     'related_link':absolute_url,
-            #     # 'absolute_url':absolute_url
-            # }
+        # for data in response.xpath("//table[@class='listing_table']//td//a"):
+        text = response.xpath("//table[@class='listing_table']//td//a/text()").get()
+        related_link = response.xpath("//table[@class='listing_table']//td//a/@href").get()
+        absolute_url = f"https://www.freepatentsonline.com{related_link}"
+        # yield{
+        #     'text':text, 
+        #     'related_link':absolute_url,
+        #     # 'absolute_url':absolute_url
+        # }
 
-            yield response.follow(url=absolute_url, callback = self.linkfollow, meta={'title':text})
+        yield response.follow(url=absolute_url, callback = self.linkfollow, meta={'title':text})
 
     def linkfollow(self, response):
         title = response.request.meta['title']
